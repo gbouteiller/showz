@@ -1,0 +1,3 @@
+{
+  "extends": "@showz/typescript-config/base.json"
+}
