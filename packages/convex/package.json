@@ -11,6 +11,6 @@
 		"convex": "^1.25.4"
 	},
 	"exports": {
-		"./*": "./src/_generated/*"
+		"./*": "./src/_generated/*.js"
 	}
 }
