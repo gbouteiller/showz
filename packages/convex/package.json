@@ -12,5 +12,8 @@
 	},
 	"exports": {
 		"./*": "./src/_generated/*.js"
+	},
+	"devDependencies": {
+		"@types/node": "^20.19.9"
 	}
 }
