@@ -3,6 +3,7 @@ import { Button } from "@showz/ui/components/button";
 import { fetchQuery } from "convex/nextjs";
 import Link from "next/link";
 
+// ROOT ************************************************************************************************************************************
 export default async function Page() {
 	const title = await fetchQuery(api.pages.home);
 
