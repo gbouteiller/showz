@@ -1,0 +1,16 @@
+{
+	"name": "@showz/convex",
+	"version": "1.0.0",
+	"type": "module",
+	"sideEffects": false,
+	"scripts": {
+		"dev": "convex dev",
+		"setup": "convex dev --until-success"
+	},
+	"dependencies": {
+		"convex": "^1.25.4"
+	},
+	"exports": {
+		"./*": "./src/_generated/*"
+	}
+}
