@@ -7,5 +7,8 @@ export const home = query({
 
 export const admin = query({
 	args: {},
-	handler: async () => "Admin",
+	handler: async (ctx) => {
+		const identity = await ctx.auth.getUserIdentity();
+		return identity?.name ?? "Anonymous";
+	},
 });

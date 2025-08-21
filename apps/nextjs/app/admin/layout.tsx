@@ -1,8 +1,6 @@
-import type { PropsWithChildren } from "react";
 import { Providers } from "./providers";
 
 // ROOT ************************************************************************************************************************************
-export default function AdminLayout({ children }: AdminLayoutProps) {
+export default function AdminLayout({ children }: LayoutProps<"/admin">) {
 	return <Providers>{children}</Providers>;
 }
-type AdminLayoutProps = PropsWithChildren;
