@@ -1,0 +1,18 @@
+---
+import { api } from "@showz/convex/api";
+import { Button } from "@showz/ui/components/button";
+import Layout from "./_layout.astro";
+
+const title = await Astro.locals.convex.fetchQuery(api.pages.home);
+---
+
+<Layout>
+  <div class="flex items-center justify-center min-h-svh">
+    <div class="flex flex-col items-center justify-center gap-4">
+      <h1 class="text-2xl font-bold">{title}</h1>
+      <Button variant="link">
+        <a href="/admin">Go to Admin</a>
+      </Button>
+    </div>
+  </div>
+</Layout>

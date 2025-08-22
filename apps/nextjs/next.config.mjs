@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  transpilePackages: ["@showz/ui"],
+	transpilePackages: ["@showz/ui"],
+	typedRoutes: true,
 };
 
 export default nextConfig;
