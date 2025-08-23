@@ -24,7 +24,13 @@ const preloadQuery = async <Q extends FunctionReference<"query">>(query: Q, ...a
 };
 
 const withClerk = defineMiddleware(
-	clerkMiddleware(),
+	(context, next) => {
+		try {
+			clerkMiddleware()(context, next);
+		} catch (error) {
+			console.log(error);
+		}
+	},
 	// async (auth, context, next) => {
 	// const { getToken, redirectToSignIn, userId } = auth();
 	// const token = (await getToken({ template: "convex" })) ?? undefined;
