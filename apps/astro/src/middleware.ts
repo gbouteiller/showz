@@ -1,4 +1,4 @@
-import { CONVEX_URL } from "astro:env/client";
+import { PUBLIC_CONVEX_URL } from "astro:env/client";
 import { clerkMiddleware, createRouteMatcher } from "@clerk/astro/server";
 import { defineMiddleware, sequence } from "astro/middleware";
 import { ConvexHttpClient } from "convex/browser";
@@ -7,7 +7,7 @@ import { type FunctionReference, type FunctionReturnType, getFunctionName } from
 import { convexToJson } from "convex/values";
 
 const isProtectedRoute = createRouteMatcher(["/admin(.*)"]);
-const convexClient = new ConvexHttpClient(CONVEX_URL);
+const convexClient = new ConvexHttpClient(PUBLIC_CONVEX_URL);
 // @ts-expect-error
 convexClient.setFetchOptions({ cache: "no-store" });
 

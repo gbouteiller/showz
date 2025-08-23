@@ -13,9 +13,9 @@ export default defineConfig({
 	},
 	env: {
 		schema: {
-			CONVEX_URL: envField.string({ context: "client", access: "public" }),
 			CLERK_SECRET_KEY: envField.string({ context: "server", access: "secret" }),
 			PUBLIC_CLERK_PUBLISHABLE_KEY: envField.string({ context: "client", access: "public" }),
+			PUBLIC_CONVEX_URL: envField.string({ context: "client", access: "public" }),
 		},
 	},
 });
