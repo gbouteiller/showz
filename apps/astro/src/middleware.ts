@@ -24,19 +24,12 @@ const preloadQuery = async <Q extends FunctionReference<"query">>(query: Q, ...a
 };
 
 const withClerk = defineMiddleware(
-	(context, next) => {
-		try {
-			clerkMiddleware()(context, next);
-		} catch (error) {
-			console.log(error);
-		}
-	},
-	// async (auth, context, next) => {
-	// const { getToken, redirectToSignIn, userId } = auth();
-	// const token = (await getToken({ template: "convex" })) ?? undefined;
-	// if (token) context.locals.convex.client.setAuth(token);
-	// return !userId && isProtectedRoute(context.request) ? redirectToSignIn() : next();
-	// }),
+	clerkMiddleware(async (auth, context, next) => {
+		const { getToken, redirectToSignIn, userId } = auth();
+		const token = (await getToken({ template: "convex" })) ?? undefined;
+		if (token) context.locals.convex.client.setAuth(token);
+		return !userId && isProtectedRoute(context.request) ? redirectToSignIn() : next();
+	}),
 );
 
 const withConvex = defineMiddleware((context, next) => {
