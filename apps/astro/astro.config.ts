@@ -5,7 +5,7 @@ import tailwindcss from "@tailwindcss/vite";
 import { defineConfig, envField } from "astro/config";
 
 export default defineConfig({
-	integrations: [clerk(), react()],
+	integrations: [clerk({ clerkJSVariant: "headless" }), react()],
 	output: "server",
 	adapter: vercel(),
 	vite: {
