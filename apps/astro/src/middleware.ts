@@ -27,10 +27,12 @@ const preloadQuery = async <Q extends FunctionReference<"query">>(query: Q, ...a
 const withClerk = defineMiddleware(
 	clerkMiddleware(
 		async (auth, context, next) => {
+			if (!isProtectedRoute(context.request)) return next();
 			const { getToken, redirectToSignIn, userId } = auth();
+			if (!userId) return redirectToSignIn();
 			const token = (await getToken({ template: "convex" })) ?? undefined;
 			if (token) context.locals.convex.client.setAuth(token);
-			return !userId && isProtectedRoute(context.request) ? redirectToSignIn() : next();
+			return next();
 		},
 		{ secretKey: CLERK_SECRET_KEY },
 	),
