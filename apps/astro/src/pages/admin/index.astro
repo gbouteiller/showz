@@ -1,5 +1,5 @@
 ---
-import { SignOutButton } from "@clerk/astro/components";
+// import { SignOutButton } from "@clerk/astro/components";
 import { api } from "@showz/convex/api";
 import { Button } from "@showz/ui/components/button";
 import RootLayout from "../_layout.astro";
@@ -12,9 +12,9 @@ const preloaded = await Astro.locals.convex.preloadQuery(api.pages.admin);
   <div class="flex items-center justify-center min-h-svh">
     <div class="flex flex-col items-center justify-center gap-4">
       <AdminUser client:load preloaded={preloaded} />
-      <SignOutButton asChild>
+      <!-- <SignOutButton asChild>
         <Button variant="link" className="cursor-pointer"> Sign out </Button>
-      </SignOutButton>
+      </SignOutButton> -->
       <Button variant="link" className="cursor-pointer">
         <a href="/">Go to Home</a>
       </Button>
