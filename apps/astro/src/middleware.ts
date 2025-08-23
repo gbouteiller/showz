@@ -1,4 +1,5 @@
 import { PUBLIC_CONVEX_URL } from "astro:env/client";
+import { CLERK_SECRET_KEY } from "astro:env/server";
 import { clerkMiddleware, createRouteMatcher } from "@clerk/astro/server";
 import { defineMiddleware, sequence } from "astro/middleware";
 import { ConvexHttpClient } from "convex/browser";
@@ -23,14 +24,21 @@ const preloadQuery = async <Q extends FunctionReference<"query">>(query: Q, ...a
 	} as Preloaded<Q>;
 };
 
-const withClerk = defineMiddleware(
-	clerkMiddleware(async (auth, context, next) => {
-		const { getToken, redirectToSignIn, userId } = auth();
-		const token = (await getToken({ template: "convex" })) ?? undefined;
-		if (token) context.locals.convex.client.setAuth(token);
-		return !userId && isProtectedRoute(context.request) ? redirectToSignIn() : next();
-	}),
-);
+const withClerk = defineMiddleware((context, next) => {
+	try {
+		return clerkMiddleware(async (auth, context, next) => {
+			const { getToken, redirectToSignIn, userId } = auth();
+			const token = (await getToken({ template: "convex" })) ?? undefined;
+			if (token) context.locals.convex.client.setAuth(token);
+			return !userId && isProtectedRoute(context.request) ? redirectToSignIn() : next();
+		})(context, next);
+	} catch (error) {
+		console.log(error);
+		console.log("CLERK SECRET KEY", CLERK_SECRET_KEY);
+		console.log("PUBLIC_CONVEX_URL", PUBLIC_CONVEX_URL);
+		return next();
+	}
+});
 
 const withConvex = defineMiddleware((context, next) => {
 	context.locals.convex = { client: convexClient, fetchQuery, preloadQuery };
