@@ -8,7 +8,7 @@
 		"setup": "convex dev --until-success"
 	},
 	"dependencies": {
-		"convex": "^1.25.4"
+		"convex": "^1.26.1"
 	},
 	"exports": {
 		"./*": "./src/_generated/*.js"
