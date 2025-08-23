@@ -6,6 +6,7 @@ import { defineConfig, envField } from "astro/config";
 
 export default defineConfig({
 	integrations: [clerk({}), react()],
+	output: "server",
 	adapter: vercel(),
 	vite: {
 		plugins: [tailwindcss()],
