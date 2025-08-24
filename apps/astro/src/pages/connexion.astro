@@ -1,0 +1,21 @@
+---
+import { actions } from "astro:actions";
+import { api } from "@showz/convex/api";
+import { Button } from "@showz/ui/components/button";
+import Layout from "./_layout.astro";
+
+const result = Astro.getActionResult(actions.signIn);
+if (result?.data) return Astro.redirect(`/admin`);
+---
+
+<Layout>
+  <div class="flex items-center justify-center min-h-svh">
+    <div class="flex flex-col items-center justify-center gap-4">
+      <form method="POST" action={actions.signIn}>
+        <input type="email" name="email" placeholder="Email" />
+        <input type="password" name="password" placeholder="Password" />
+        <Button type="submit">Sign in</Bu>
+      </form>
+    </div>
+  </div>
+</Layout>

@@ -5,6 +5,9 @@ import type { FunctionReference, FunctionReturnType } from "convex/server";
 declare global {
 	declare namespace App {
 		interface Locals {
+			auth: {
+				getToken: () => Promise<string | undefined>;
+			};
 			convex: {
 				client: ConvexHttpClient;
 				preloadQuery: <Q extends FunctionReference<"query">>(query: Q, ...args: Q["_args"]) => Promise<FunctionReturnType<Q>>;

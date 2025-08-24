@@ -1,10 +1,9 @@
 "use client";
 
-import { frFR } from "@clerk/localizations";
-import { ClerkProvider, useAuth } from "@clerk/nextjs";
+import { ConvexBetterAuthProvider } from "@convex-dev/better-auth/react";
 import { ConvexReactClient } from "convex/react";
-import { ConvexProviderWithClerk } from "convex/react-clerk";
 import type { PropsWithChildren } from "react";
+import { authClient } from "@/lib/auth";
 
 if (!process.env.NEXT_PUBLIC_CONVEX_URL) throw new Error("Missing NEXT_PUBLIC_CONVEX_URL in your .env file");
 const convex = new ConvexReactClient(process.env.NEXT_PUBLIC_CONVEX_URL);
@@ -12,10 +11,8 @@ const convex = new ConvexReactClient(process.env.NEXT_PUBLIC_CONVEX_URL);
 // ROOT ************************************************************************************************************************************
 export function Providers({ children }: PropsWithChildren) {
 	return (
-		<ClerkProvider localization={frFR}>
-			<ConvexProviderWithClerk client={convex} useAuth={useAuth}>
-				{children}
-			</ConvexProviderWithClerk>
-		</ClerkProvider>
+		<ConvexBetterAuthProvider client={convex} authClient={authClient}>
+			{children}
+		</ConvexBetterAuthProvider>
 	);
 }
